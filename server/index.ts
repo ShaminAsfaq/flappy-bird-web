@@ -2,6 +2,7 @@ import express from 'express';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
 import cors from 'cors';
+import path from 'path';
 
 interface Player {
   id: string;
@@ -14,10 +15,13 @@ interface Player {
 const app = express();
 app.use(cors());
 
+// Serve static files from the Angular dist directory
+app.use(express.static(path.join(__dirname, '../../dist/flappy-bird-web/browser')));
+
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
-    origin: "http://localhost:4200",
+    origin: process.env.NODE_ENV === 'production' ? false : "http://localhost:4200",
     methods: ["GET", "POST"]
   }
 });
@@ -93,6 +97,11 @@ io.on('connection', (socket) => {
       gameStarted = false;
     }
   });
+});
+
+// Handle Angular routing
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../dist/flappy-bird-web/browser/index.html'));
 });
 
 const PORT = process.env.PORT || 3000;
