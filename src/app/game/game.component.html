@@ -60,14 +60,14 @@
 			</div>
 		</div>
 		<div *ngIf="!areAllPlayersFinished()" class="waiting-message">
-			Waiting for other players to finish...
+			Waiting for other players to finish.
 		</div>
 		<div *ngIf="showRestartCountdown" class="restart-countdown">
 			Returning in {{ restartCountdown }}
 		</div>
 	</div>
 
-	<div *ngIf="isGameStarted" class="waiting-message">
+	<div *ngIf="!localPlayerName && (isGameStarted || showCountdown)" class="waiting-message-no-entry">
 		Wait for the game to end.
 	</div>
 
