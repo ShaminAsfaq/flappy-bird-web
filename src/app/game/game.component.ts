@@ -46,6 +46,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
 	private readonly SKY_HEIGHT = 50;
 
 	// Game state
+	gameInitialized: any = undefined;
 	isGameStarted: boolean = false;
 	isGameOver: boolean = false;
 	showGameOver: boolean = false;
@@ -84,13 +85,9 @@ export class GameComponent implements AfterViewInit, OnDestroy {
 		// Initialize canvas when view is ready
 		if (this.gameCanvas?.nativeElement) {
 			const canvas = this.gameCanvas.nativeElement;
-			// Set canvas size to match viewport
 			canvas.width = window.innerWidth;
 			canvas.height = window.innerHeight;
 			this.ctx = canvas.getContext('2d')!;
-
-			// Add resize handler
-			window.addEventListener('resize', this.handleResize);
 		}
 	}
 
@@ -131,17 +128,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
 		if (this.animationFrameId) {
 			cancelAnimationFrame(this.animationFrameId);
 		}
-		// Remove resize handler
-		window.removeEventListener('resize', this.handleResize);
 	}
-
-	private handleResize = () => {
-		if (this.gameCanvas?.nativeElement) {
-			const canvas = this.gameCanvas.nativeElement;
-			canvas.width = window.innerWidth;
-			canvas.height = window.innerHeight;
-		}
-	};
 
 	private setupMultiplayer(): void {
 		this.subscriptions.push(
@@ -213,6 +200,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
 	private startCountdown(): void {
 		this.countdownValue = 3;
 		this.isGameRunning = false;
+		this.gameInitialized = true;
 
 		this.countdownInterval = setInterval(() => {
 			this.countdownValue--;
@@ -227,6 +215,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
 		console.log('Resetting game...');
 		this.score = 0;
 		this.isGameOver = false;
+		this.gameInitialized = false;
 		this.pipes = [];
 		this.lastPipeSpawn = 0;
 		if (this.birdComponent) {
