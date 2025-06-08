@@ -1,0 +1,348 @@
+.game-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #87CEEB;
+  position: relative;
+  overflow: hidden;
+}
+
+.name-input-screen,
+.waiting-screen,
+.game-over-screen {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  max-width: 90%;
+  width: 400px;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+input {
+  padding: 0.8rem;
+  font-size: 1.1rem;
+  border: 2px solid #ccc;
+  border-radius: 0.5rem;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+input:focus {
+  border-color: #4CAF50;
+}
+
+button {
+  padding: 0.8rem 1.5rem;
+  font-size: 1.1rem;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.players-list {
+  margin: 1.5rem 0;
+  text-align: left;
+}
+
+.player-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  transition: transform 0.2s;
+}
+
+.player-item:hover {
+  transform: scale(1.02);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.player-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #FFD700;
+}
+
+.player-status {
+  margin-left: 10px;
+  font-size: 0.9em;
+  color: #ff0000;
+}
+
+.player-status.ready {
+  color: #4CAF50;
+  font-weight: bold;
+}
+
+.ready-button {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.ready-button:hover {
+  background: #45a049;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.ready-button:disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.game-screen {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.countdown {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 8rem;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.final-scores {
+  margin: 1.5rem 0;
+}
+
+.final-scores h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+  color: #4CAF50;
+}
+
+.player-score {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  margin: 0.5rem 0;
+  border-radius: 0.5rem;
+  transition: transform 0.2s;
+}
+
+.player-score:hover {
+  transform: scale(1.02);
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.player-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.score {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #4CAF50;
+}
+
+.game-over-screen {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.8);
+  padding: 2rem;
+  border-radius: 1rem;
+  text-align: center;
+  color: white;
+  z-index: 1000;
+  min-width: 300px;
+}
+
+.game-over-screen h2 {
+  margin: 0 0 1rem 0;
+  font-size: 2rem;
+  color: #ff4444;
+}
+
+.game-over-screen button {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 1rem;
+}
+
+.game-over-screen button:hover {
+  background: #45a049;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.start-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.start-button:hover {
+  background: #45a049;
+  transform: translate(-50%, -50%) scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.start-button:active {
+  transform: translate(-50%, -50%) scale(0.95);
+}
+
+.waiting-screen {
+  text-align: center;
+  padding: 2rem;
+}
+
+.waiting-screen h2 {
+  color: #4CAF50;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+}
+
+.players-list {
+  max-width: 400px;
+  margin: 0 auto 2rem;
+}
+
+.waiting-screen .player-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333333;
+}
+
+.rank {
+  font-weight: bold;
+  color: #FFD700;
+  margin-right: 10px;
+  font-size: 1.2rem;
+}
+
+.waiting-message {
+  color: #800000;
+  margin-top: 5%;
+  font-size: 2em;
+  font-weight: bold;
+  text-align: center;
+  text-shadow: 2px 2px 0px #ffd93d;
+  animation: bounce 1s infinite;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.restart-countdown {
+  color: #4CAF50;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 1rem 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.play-again-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s;
+}
+
+.play-again-button:hover {
+  background-color: #45a049;
+}
+
+.ready-text {
+  color: #4CAF50;
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-top: 10px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}

@@ -1,0 +1,75 @@
+<div class="game-container">
+	<span>
+	<!-- Name Input Screen -->
+	<div *ngIf="!isWaitingForPlayers && !isGameStarted && !showGameOver" class="name-input-screen">
+		<h1>Flappy Bird Multiplayer</h1>
+		<div class="input-container">
+			<input
+				type="text"
+				[(ngModel)]="localPlayerName"
+				placeholder="Enter your name"
+				maxlength="20"
+			>
+			<button (click)="joinGame()" [disabled]="!localPlayerName.trim() || isGameStarted">
+				Join Game
+			</button>
+		</div>
+	</div>
+
+	<!-- Waiting for Players Screen -->
+	<div *ngIf="isWaitingForPlayers && !isGameStarted && !showGameOver" class="waiting-screen">
+		<h2>Waiting for Players</h2>
+		<div class="players-list">
+			<div *ngFor="let player of players" class="player-item">
+				<span class="player-name">{{ player.name }}</span>
+				<span class="player-status" [class.ready]="player.isReady">
+          {{ player.isReady ? 'Ready' : 'Not Ready' }}
+        </span>
+			</div>
+		</div>
+		<button
+			(click)="setReady()"
+			[disabled]="isReady"
+			class="ready-button"
+		>
+			{{ isReady ? 'Ready!' : 'I\'m Ready' }}
+		</button>
+	</div>
+
+	<!-- Game Screen -->
+	<div *ngIf="isGameStarted && !isGameOver && localPlayerName" class="game-screen">
+		<canvas #gameCanvas></canvas>
+		<app-bird></app-bird>
+		<!-- Countdown -->
+		<div *ngIf="!isGameRunning" class="countdown">
+			{{ countdownValue }}
+		</div>
+	</div>
+
+	<!-- Game Over Screen -->
+	<div *ngIf="isGameOver" class="game-over-screen">
+		<h2>Game Over!</h2>
+		<div class="final-scores">
+			<h3>Final Results:</h3>
+			<div *ngFor="let player of getSortedPlayers(); let i = index" class="player-score">
+				<div class="player-info">
+					<span class="rank">#{{ i + 1 }}</span>
+					<span class="player-name">{{ player.name }}</span>
+					<span class="score">{{ player.score }}</span>
+				</div>
+			</div>
+		</div>
+		<div *ngIf="!areAllPlayersFinished()" class="waiting-message">
+			Waiting for other players to finish...
+		</div>
+		<div *ngIf="showRestartCountdown" class="restart-countdown">
+			Returning in {{ restartCountdown }}
+		</div>
+	</div>
+
+	<div *ngIf="isGameStarted" class="waiting-message">
+		Wait for the game to end.
+	</div>
+
+	</span>
+</div>

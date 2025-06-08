@@ -2,14 +2,14 @@ import { Component, ElementRef, ViewChild, AfterViewInit, OnDestroy, HostListene
 import { BirdComponent } from '../bird/bird';
 
 @Component({
-  selector: 'app-game',
-	standalone: true,
-	imports: [BirdComponent],
-  templateUrl: './game.html',
-	styleUrls: ['./game.css']
+  selector: 'app-single-player-game',
+  standalone: true,
+  imports: [],
+  templateUrl: './single-player-game.component.html',
+  styleUrl: './single-player-game.component.css'
 })
-export class GameComponent implements AfterViewInit, OnDestroy {
-	@ViewChild('gameCanvas') canvasRef!: ElementRef<HTMLCanvasElement>;
+export class SinglePlayerGameComponent implements AfterViewInit, OnDestroy {
+	@ViewChild('singlePlayerCanvas') canvasRef!: ElementRef<HTMLCanvasElement>;
 	private ctx!: CanvasRenderingContext2D;
 	private animationFrameId: number = 0;
 	private readonly GAME_SPEED = 2; // Speed for pipes and bird when game is running
@@ -178,13 +178,13 @@ export class GameComponent implements AfterViewInit, OnDestroy {
 		const maxHeight = this.calculateMaxAchievableHeight();
 		const minGapY = 100; // Minimum distance from top
 		const maxGapY = window.innerHeight - this.GROUND_HEIGHT - this.GROUND_GRASS_HEIGHT - this.PIPE_GAP - 50;
-		
+
 		// Calculate the maximum possible gap position that's still achievable
 		const achievableMaxGapY = Math.min(
 			maxGapY,
 			window.innerHeight / 2 + maxHeight / 2
 		);
-		
+
 		// Generate a random gap position within achievable range
 		return Math.random() * (achievableMaxGapY - minGapY) + minGapY;
 	}
@@ -325,7 +325,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
 		if (this.collisionEffect) {
 			const elapsed = Date.now() - this.collisionEffectStartTime;
 			const progress = Math.min(elapsed / this.COLLISION_EFFECT_DURATION, 1);
-			
+
 			// Fade out and expand
 			this.collisionEffect.alpha = 1 - progress;
 			this.collisionEffect.radius = 30 + (progress * 20);
@@ -334,13 +334,13 @@ export class GameComponent implements AfterViewInit, OnDestroy {
 			this.ctx.save();
 			this.ctx.globalAlpha = this.collisionEffect.alpha;
 			this.ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
-			
+
 			// Draw multiple circles to create cloud effect
 			for (let i = 0; i < 5; i++) {
 				const angle = (i / 5) * Math.PI * 2;
 				const offsetX = Math.cos(angle) * (this.collisionEffect.radius * 0.3);
 				const offsetY = Math.sin(angle) * (this.collisionEffect.radius * 0.3);
-				
+
 				this.ctx.beginPath();
 				this.ctx.arc(
 					this.collisionEffect.x + offsetX,
@@ -471,8 +471,8 @@ export class GameComponent implements AfterViewInit, OnDestroy {
 		// Draw top score with dynamic font size
 		const topScoreDigits = this.highScore.toString().length;
 		const topScoreFont = topScoreDigits > 3 ? this.HIGH_SCORE_FONT_SMALL :
-							topScoreDigits > 2 ? this.HIGH_SCORE_FONT :
-							this.HIGH_SCORE_FONT_SMALL;
+			topScoreDigits > 2 ? this.HIGH_SCORE_FONT :
+				this.HIGH_SCORE_FONT_SMALL;
 
 		this.ctx.font = topScoreFont;
 		this.ctx.fillStyle = this.SCORE_SHADOW_COLOR;
