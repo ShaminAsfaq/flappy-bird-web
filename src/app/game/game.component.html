@@ -5,18 +5,18 @@
 		<h1>Flappy Bird Multiplayer</h1>
 		<div class="input-container">
 			<input
-				type="text"
-				[(ngModel)]="localPlayerName"
-				placeholder="Enter your name"
-				maxlength="20"
-			>
+                    type="text"
+                    [(ngModel)]="localPlayerName"
+                    placeholder="Enter your name"
+                    maxlength="20"
+            >
 			<button (click)="joinGame()" [disabled]="!localPlayerName.trim() || isGameStarted">
 				Join Game
 			</button>
 		</div>
 	</div>
 
-	<!-- Waiting for Players Screen -->
+        <!-- Waiting for Players Screen -->
 	<div *ngIf="isWaitingForPlayers && !isGameStarted && !showGameOver" class="waiting-screen">
 		<h2>Waiting for Players</h2>
 		<div class="players-list">
@@ -28,25 +28,25 @@
 			</div>
 		</div>
 		<button
-			(click)="setReady()"
-			[disabled]="isReady"
-			class="ready-button"
-		>
+                (click)="setReady()"
+                [disabled]="isReady"
+                class="ready-button"
+        >
 			{{ isReady ? 'Ready!' : 'I\'m Ready' }}
 		</button>
 	</div>
 
-	<!-- Game Screen -->
+        <!-- Game Screen -->
 	<div *ngIf="isGameStarted && !isGameOver && localPlayerName" class="game-screen">
 		<canvas #gameCanvas></canvas>
 		<app-bird></app-bird>
-		<!-- Countdown -->
+        <!-- Countdown -->
 		<div *ngIf="!isGameRunning" class="countdown">
 			{{ countdownValue }}
 		</div>
 	</div>
 
-	<!-- Game Over Screen -->
+        <!-- Game Over Screen -->
 	<div *ngIf="isGameOver" class="game-over-screen">
 		<h2>Game Over!</h2>
 		<div class="final-scores">
