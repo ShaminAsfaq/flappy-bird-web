@@ -2,10 +2,10 @@ import { Component, ElementRef, ViewChild, AfterViewInit, OnDestroy, HostListene
 import { BirdComponent } from '../bird/bird';
 
 @Component({
-	selector: 'app-game',
+  selector: 'app-game',
 	standalone: true,
 	imports: [BirdComponent],
-	templateUrl: './game.html',
+  templateUrl: './game.html',
 	styleUrls: ['./game.css']
 })
 export class GameComponent implements AfterViewInit, OnDestroy {
