@@ -5,7 +5,11 @@
   justify-content: center;
   align-items: center;
   background-color: #87CEEB;
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
   overflow: hidden;
 }
 
@@ -122,15 +126,24 @@ button:disabled {
 }
 
 .game-screen {
-  width: 100%;
-  height: 100%;
-  position: relative;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
 }
 
 canvas {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .countdown {
@@ -289,14 +302,27 @@ canvas {
 }
 
 .waiting-message {
-  color: #800000;
+  color: #ffd93d;
   margin-top: 5%;
-  font-size: 2em;
+  font-size: 2.2em;
   font-weight: bold;
   text-align: center;
-  text-shadow: 2px 2px 0px #ffd93d;
   animation: bounce 1s infinite;
-  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+  /*text-shadow: 2px 2px 0 #ffd93d;*/
+  letter-spacing: 0.5px;
+}
+
+.waiting-message-no-entry {
+  color: #f13c3c;
+  margin-top: 5%;
+  font-size: 2.2em;
+  font-weight: bold;
+  text-align: center;
+  animation: bounce 1s infinite;
+  font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+  text-shadow: 2px 2px 0 #ffd93d;
+  letter-spacing: 0.5px;
 }
 
 @keyframes bounce {
